@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khert Kherti — Graphic Mockups</title>
+  <style>
+    :root {
+      --forest: #0b3928;
+      --yellow: #f5b91d;
+      --gold: #dc7c18;
+      --cream: #fff5df;
+      --ink: #171b17;
+      --parsley: #4f8b28;
+      --red: #bf3e2b;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1600px; height: 1200px; overflow: hidden; }
+    body {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+    }
+    .mockup { position: relative; display: none; width: 1600px; height: 1200px; overflow: hidden; }
+    .mockup.active { display: block; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: .18;
+      background-image:
+        radial-gradient(circle at 20% 12%, rgba(255,255,255,.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 40%, rgba(15,20,16,.25) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 35% 82%, rgba(255,255,255,.45) 0 1px, transparent 1.5px);
+      background-size: 13px 13px, 17px 17px, 19px 19px;
+      mix-blend-mode: multiply;
+    }
+    .eyebrow {
+      font-size: 22px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase;
+    }
+    .wordmark {
+      font-size: 74px; line-height: .88; font-weight: 900; letter-spacing: -5px;
+      text-transform: uppercase;
+    }
+    .tag { font-size: 25px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; }
+    .burst {
+      position: absolute; width: 110px; height: 110px; border-radius: 50%;
+      border: 6px dashed var(--yellow); opacity: .9;
+    }
+    .brand-seal {
+      overflow: hidden; display: grid; place-items: center; border-radius: 50%;
+      background: var(--cream); border: 8px solid var(--yellow); box-shadow: 0 7px 0 rgba(0,0,0,.18);
+    }
+    .brand-seal img { width: 130%; height: 130%; object-fit: cover; }
+    .label {
+      display: grid; place-items: center; color: var(--cream); background: var(--forest);
+      border: 4px solid var(--yellow); text-align: center; font-weight: 900;
+    }
+    .stamp {
+      display: inline-grid; place-items: center; width: 108px; height: 108px;
+      border-radius: 50%; background: var(--yellow); border: 5px solid var(--forest);
+      font-weight: 900; text-align: center; line-height: .95; transform: rotate(-12deg);
+    }
+    .patty {
+      position: absolute; width: 150px; height: 110px; border-radius: 50%;
+      background:
+        radial-gradient(circle at 18% 25%, #f5d06b 0 4px, transparent 5px),
+        radial-gradient(circle at 67% 42%, #4f8b28 0 5px, transparent 6px),
+        radial-gradient(circle at 42% 70%, #f4b23c 0 3px, transparent 4px),
+        linear-gradient(145deg, #f6c14e, #cf6714 72%);
+      box-shadow: inset 0 -11px 0 rgba(107,43,8,.25), 0 14px 16px rgba(64,30,4,.25);
+      border: 5px solid #b8550d;
+    }
+    .dip {
+      position: absolute; width: 100px; height: 62px; border-radius: 50%;
+      border: 7px solid var(--cream); box-shadow: 0 11px 12px rgba(0,0,0,.18);
+    }
+    .dip::after {
+      content: ""; position: absolute; inset: 13px 18px; border-radius: 50%;
+      background: currentColor; box-shadow: inset 0 -7px 0 rgba(0,0,0,.16);
+    }
+    .dip.white { color: #f6eee1; background: #e6ded1; }
+    .dip.red { color: var(--red); background: #7d251d; }
+    .dip.green { color: var(--parsley); background: #2e5e20; }
+
+    /* 01 — takeaway packaging */
+    #packaging {
+      background: linear-gradient(135deg, #ffe8a4 0%, var(--cream) 53%, #efcd65 100%);
+    }
+    #packaging .topcopy { position: absolute; left: 108px; top: 92px; width: 590px; }
+    #packaging .topcopy .wordmark { color: var(--forest); font-size: 94px; }
+    #packaging .topcopy .tag { margin-top: 30px; color: var(--forest); }
+    #packaging .mini-copy {
+      margin-top: 50px; width: 390px; padding: 16px 22px; background: var(--forest);
+      color: var(--cream); font-size: 24px; font-weight: 900; transform: rotate(-2deg);
+    }
+    #packaging .brand-seal { position: absolute; top: 86px; right: 108px; width: 172px; height: 172px; }
+    #packaging .burst.one { right: 66px; top: 250px; }
+    #packaging .burst.two { left: 680px; bottom: 52px; width: 80px; height: 80px; border-color: var(--forest); }
+    #packaging .box-scene {
+      position: absolute; right: 88px; bottom: 106px; width: 1040px; height: 680px;
+      transform: rotate(-2deg);
+    }
+    #packaging .box-lid {
+      position: absolute; left: 245px; top: 0; width: 615px; height: 330px;
+      transform: skewX(-17deg); background: var(--yellow); border: 12px solid var(--forest);
+      box-shadow: 0 36px 35px rgba(31,29,13,.18);
+    }
+    #packaging .box-lid::before {
+      content: "CRISPY PERSIAN KUKU"; position: absolute; left: 95px; top: 72px; color: var(--forest);
+      font-size: 28px; font-weight: 900; letter-spacing: 3px;
+    }
+    #packaging .box-front {
+      position: absolute; left: 155px; top: 270px; width: 750px; height: 270px;
+      transform: skewX(-17deg); background: var(--forest); border: 12px solid var(--ink);
+      box-shadow: 0 28px 34px rgba(31,29,13,.3);
+    }
+    #packaging .box-front .label {
+      position: absolute; left: 215px; top: 48px; width: 300px; height: 148px; transform: skewX(17deg);
+      font-size: 38px; line-height: .95; letter-spacing: -2px;
+    }
+    #packaging .box-side {
+      position: absolute; left: 870px; top: 250px; width: 140px; height: 292px;
+      background: var(--yellow); border: 12px solid var(--ink); transform: skewY(38deg);
+    }
+    #packaging .patty.a { left: 385px; top: 160px; transform: rotate(13deg); }
+    #packaging .patty.b { left: 545px; top: 130px; transform: rotate(-12deg); }
+    #packaging .patty.c { left: 663px; top: 176px; transform: rotate(24deg); }
+    #packaging .dip.white { left: 4px; top: 440px; }
+    #packaging .dip.red { left: 104px; top: 510px; }
+    #packaging .dip.green { left: 25px; top: 560px; }
+    #packaging .carry-bag {
+      position: absolute; right: 8px; bottom: 0; width: 245px; height: 328px; background: #c58d4c;
+      border: 9px solid var(--ink); box-shadow: 0 24px 22px rgba(0,0,0,.22); transform: rotate(5deg);
+    }
+    #packaging .carry-bag::before {
+      content: ""; position: absolute; left: 61px; top: -76px; width: 108px; height: 90px;
+      border: 12px solid var(--ink); border-bottom: 0; border-radius: 60px 60px 0 0;
+    }
+    #packaging .carry-bag .brand-seal { position: absolute; top: 73px; left: 37px; width: 155px; height: 155px; border-color: var(--forest); }
+    #packaging .corner-note { position: absolute; left: 110px; bottom: 100px; width: 360px; color: var(--forest); font-size: 30px; font-weight: 900; line-height: 1.05; }
+
+    /* 02 — food cart */
+    #cart { background: linear-gradient(180deg, #f4ad32 0%, #e87924 42%, #153426 43%, #071e15 100%); }
+    #cart .sky-lines { position: absolute; inset: 0; opacity: .35; background: repeating-linear-gradient(125deg, transparent 0 62px, rgba(255,238,183,.45) 63px 67px, transparent 68px 142px); }
+    #cart .copy { position: absolute; left: 105px; top: 91px; color: var(--cream); width: 530px; z-index: 4; }
+    #cart .copy .wordmark { font-size: 93px; text-shadow: 5px 6px 0 var(--forest); }
+    #cart .copy .tag { margin-top: 28px; color: var(--forest); }
+    #cart .city { position: absolute; left: 0; right: 0; bottom: 315px; height: 180px; background: #132a20; clip-path: polygon(0 70%, 5% 70%, 5% 33%, 12% 33%, 12% 66%, 17% 66%, 17% 15%, 25% 15%, 25% 60%, 34% 60%, 34% 23%, 41% 23%, 41% 68%, 50% 68%, 50% 11%, 57% 11%, 57% 56%, 66% 56%, 66% 34%, 75% 34%, 75% 69%, 82% 69%, 82% 16%, 91% 16%, 91% 62%, 100% 62%, 100% 100%, 0 100%); }
+    #cart .cart-body {
+      position: absolute; left: 220px; bottom: 118px; width: 1160px; height: 480px; background: var(--forest);
+      border: 16px solid var(--cream); box-shadow: 0 25px 0 rgba(0,0,0,.25);
+    }
+    #cart .awning { position: absolute; left: 168px; top: -127px; width: 820px; height: 135px; border: 12px solid var(--ink); overflow: hidden; transform: skewX(-6deg); }
+    #cart .awning::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, var(--yellow) 0 86px, var(--forest) 86px 172px); }
+    #cart .window {
+      position: absolute; left: 350px; top: 78px; width: 500px; height: 290px; background: #f8d479; border: 12px solid var(--ink);
+      box-shadow: inset 0 0 0 10px var(--yellow);
+    }
+    #cart .window::after { content: "KUKU + DIPS"; position: absolute; left: 50px; bottom: 39px; color: var(--forest); font-size: 43px; font-weight: 900; letter-spacing: -2px; }
+    #cart .cart-logo { position: absolute; left: 74px; top: 83px; width: 210px; height: 210px; }
+    #cart .menu-board { position: absolute; right: 48px; top: 78px; width: 196px; height: 284px; padding: 25px 20px; background: var(--ink); color: var(--cream); border: 7px solid var(--yellow); font-size: 23px; font-weight: 900; line-height: 1.5; }
+    #cart .wheel { position: absolute; bottom: -64px; width: 138px; height: 138px; border-radius: 50%; background: var(--ink); border: 20px solid var(--cream); box-shadow: inset 0 0 0 15px var(--yellow); }
+    #cart .wheel.left { left: 205px; } #cart .wheel.right { right: 150px; }
+    #cart .mascot-wrap { position: absolute; right: 62px; bottom: 420px; width: 310px; height: 330px; overflow: hidden; z-index: 5; }
+    #cart .mascot-wrap img { width: 100%; mix-blend-mode: screen; }
+    #cart .stamp { position: absolute; left: 121px; bottom: 87px; z-index: 5; background: var(--cream); }
+
+    /* 03 — crew kit */
+    #crew { background: var(--cream); }
+    #crew .left-panel { position: absolute; inset: 0 auto 0 0; width: 615px; background: var(--yellow); }
+    #crew .left-panel .copy { position: absolute; top: 103px; left: 96px; width: 440px; color: var(--forest); }
+    #crew .left-panel .wordmark { font-size: 82px; }
+    #crew .left-panel .tag { margin-top: 30px; }
+    #crew .left-panel .big-number { margin-top: 170px; font-size: 195px; line-height: .8; font-weight: 900; color: var(--cream); text-shadow: 7px 8px 0 var(--forest); }
+    #crew .left-panel .small { margin-top: 22px; font-size: 26px; font-weight: 900; line-height: 1.22; }
+    #crew .kit { position: absolute; left: 678px; top: 100px; width: 820px; height: 1000px; }
+    #crew .apron {
+      position: absolute; left: 190px; top: 82px; width: 470px; height: 690px; background: var(--forest);
+      clip-path: polygon(13% 0, 87% 0, 95% 16%, 83% 100%, 17% 100%, 5% 16%);
+      box-shadow: 0 24px 30px rgba(0,0,0,.22);
+    }
+    #crew .apron::before {
+      content: ""; position: absolute; left: 112px; top: -83px; width: 245px; height: 172px; border: 16px solid var(--forest); border-bottom: 0; border-radius: 160px 160px 0 0;
+    }
+    #crew .apron .brand-seal { position: absolute; left: 136px; top: 130px; width: 190px; height: 190px; }
+    #crew .apron .pocket { position: absolute; left: 82px; bottom: 88px; width: 307px; height: 185px; border: 7px solid var(--yellow); border-radius: 20px 20px 48px 48px; }
+    #crew .cap { position: absolute; left: 53px; top: 32px; width: 196px; height: 118px; border-radius: 100px 100px 26px 26px; background: var(--forest); border: 9px solid var(--ink); transform: rotate(-12deg); }
+    #crew .cap::after { content: "KHERT!"; position: absolute; left: 34px; top: 35px; color: var(--yellow); font-size: 29px; font-weight: 900; transform: rotate(7deg); }
+    #crew .name-tag { position: absolute; right: 30px; top: 105px; width: 210px; height: 115px; padding: 21px; border-radius: 16px; background: var(--yellow); border: 7px solid var(--forest); font-size: 24px; font-weight: 900; }
+    #crew .name-tag span { display: block; font-size: 15px; letter-spacing: 2px; margin-bottom: 8px; }
+    #crew .cup { position: absolute; right: 22px; bottom: 175px; width: 205px; height: 300px; background: var(--cream); border: 10px solid var(--forest); border-radius: 22px 22px 60px 60px; transform: rotate(9deg); }
+    #crew .cup::before { content: ""; position: absolute; left: -13px; top: -52px; width: 202px; height: 70px; background: var(--yellow); border: 10px solid var(--forest); border-radius: 50%; }
+    #crew .cup .label { position: absolute; left: 31px; top: 86px; width: 124px; height: 126px; border-radius: 50%; font-size: 19px; line-height: .92; }
+    #crew .pin { position: absolute; left: 2px; bottom: 100px; width: 166px; height: 166px; border-radius: 50%; background: var(--yellow); border: 9px solid var(--forest); display: grid; place-items: center; color: var(--forest); font-size: 27px; font-weight: 900; text-align: center; line-height: .85; transform: rotate(-14deg); }
+    #crew .underline { position: absolute; left: 75px; bottom: 11px; height: 14px; width: 660px; border-radius: 20px; background: var(--yellow); }
+
+    /* 04 — delivery / social */
+    #delivery { background: var(--forest); color: var(--cream); }
+    #delivery .dots { position: absolute; inset: 0; opacity: .22; background-image: radial-gradient(var(--yellow) 1.8px, transparent 2px); background-size: 24px 24px; }
+    #delivery .copy { position: absolute; left: 103px; top: 97px; z-index: 4; width: 590px; }
+    #delivery .copy .eyebrow { color: var(--yellow); }
+    #delivery .copy .headline { margin-top: 24px; font-size: 109px; line-height: .82; font-weight: 900; letter-spacing: -8px; text-transform: uppercase; }
+    #delivery .copy .headline em { color: var(--yellow); font-style: normal; }
+    #delivery .copy .sub { margin-top: 40px; width: 410px; font-size: 27px; line-height: 1.25; font-weight: 900; }
+    #delivery .copy .yellow-note { margin-top: 45px; display: inline-block; background: var(--yellow); color: var(--forest); padding: 15px 21px; font-size: 23px; font-weight: 900; transform: rotate(-2deg); }
+    #delivery .bag { position: absolute; right: 140px; bottom: 77px; width: 520px; height: 770px; background: #cf9550; border: 14px solid var(--cream); box-shadow: 0 30px 35px rgba(0,0,0,.35); transform: rotate(5deg); }
+    #delivery .bag::before { content: ""; position: absolute; left: 129px; top: -142px; width: 238px; height: 180px; border: 22px solid var(--cream); border-bottom: 0; border-radius: 140px 140px 0 0; }
+    #delivery .bag .brand-seal { position: absolute; left: 140px; top: 112px; width: 236px; height: 236px; border-width: 10px; }
+    #delivery .bag .stripe { position: absolute; left: 0; right: 0; bottom: 85px; height: 132px; background: var(--forest); border-top: 10px solid var(--yellow); border-bottom: 10px solid var(--yellow); }
+    #delivery .bag .stripe span { display: block; margin: 36px 0 0 67px; color: var(--cream); font-size: 33px; font-weight: 900; letter-spacing: -2px; }
+    #delivery .mascot-card { position: absolute; left: 655px; bottom: 90px; width: 315px; height: 410px; overflow: hidden; border: 9px solid var(--yellow); background: #0a2118; transform: rotate(-8deg); box-shadow: 0 18px 25px rgba(0,0,0,.35); }
+    #delivery .mascot-card img { width: 125%; margin-left: -36px; mix-blend-mode: screen; }
+    #delivery .sticker { position: absolute; left: 707px; bottom: 491px; width: 176px; height: 176px; border-radius: 50%; display: grid; place-items: center; color: var(--forest); background: var(--yellow); border: 9px solid var(--cream); font-size: 30px; font-weight: 900; text-align: center; line-height: .85; transform: rotate(11deg); }
+    #delivery .dip.white { left: 1000px; bottom: 82px; transform: rotate(9deg); }
+    #delivery .dip.red { left: 1092px; bottom: 82px; transform: rotate(-4deg); }
+    #delivery .dip.green { left: 1183px; bottom: 82px; transform: rotate(13deg); }
+    #delivery .bottomline { position: absolute; left: 105px; bottom: 92px; font-size: 24px; font-weight: 900; letter-spacing: 2px; color: var(--yellow); }
+  </style>
+</head>
+<body>
+  <section id="packaging" class="mockup">
+    <div class="grain"></div>
+    <div class="topcopy">
+      <div class="eyebrow">01 / Takeaway packaging</div>
+      <div class="wordmark">Khert<br>Kherti</div>
+      <div class="tag">Crispy Persian Kuku</div>
+      <div class="mini-copy">PICK A DIP.<br>MAKE IT A KHERT.</div>
+    </div>
+    <div class="brand-seal"><img src="../logo-reference.jpg" alt=""></div>
+    <div class="burst one"></div><div class="burst two"></div>
+    <div class="box-scene">
+      <div class="box-lid"></div>
+      <div class="patty a"></div><div class="patty b"></div><div class="patty c"></div>
+      <div class="box-front"><div class="label">KHERT<br>KHERTI</div></div><div class="box-side"></div>
+      <div class="dip white"></div><div class="dip red"></div><div class="dip green"></div>
+      <div class="carry-bag"><div class="brand-seal"><img src="../logo-reference.jpg" alt=""></div></div>
+    </div>
+    <div class="corner-note">GOLDEN OUTSIDE.<br>GREEN AT HEART.</div>
+  </section>
+
+  <section id="cart" class="mockup">
+    <div class="sky-lines"></div><div class="grain"></div>
+    <div class="copy"><div class="eyebrow">02 / Street-food cart</div><div class="wordmark">Khert<br>Kherti</div><div class="tag">Hear the crunch. Taste Persia.</div></div>
+    <div class="city"></div>
+    <div class="mascot-wrap"><img src="../mascot-reference.jpg" alt=""></div>
+    <div class="cart-body">
+      <div class="awning"></div><div class="brand-seal cart-logo"><img src="../logo-reference.jpg" alt=""></div>
+      <div class="window"></div>
+      <div class="menu-board">POTATO<br>KUKU<br><br>HERB<br>KUKU<br><br>DIP x 3</div>
+      <div class="wheel left"></div><div class="wheel right"></div>
+    </div>
+    <div class="stamp">FRESH<br>DAILY</div>
+  </section>
+
+  <section id="crew" class="mockup">
+    <div class="grain"></div>
+    <div class="left-panel"><div class="copy"><div class="eyebrow">03 / Crew uniform</div><div class="wordmark">Kuku<br>Crew</div><div class="tag">Warm host. Crisp service.</div><div class="big-number">KH!</div><div class="small">A uniform system for a memorable, friendly counter experience.</div></div></div>
+    <div class="kit">
+      <div class="cap"></div><div class="name-tag"><span>HELLO, I'M</span>THE DIP<br>MAKER</div>
+      <div class="apron"><div class="brand-seal"><img src="../logo-reference.jpg" alt=""></div><div class="pocket"></div></div>
+      <div class="pin">HEAR<br>THE<br>CRUNCH</div>
+      <div class="cup"><div class="label">KHERT<br>KHERTI</div></div><div class="underline"></div>
+    </div>
+  </section>
+
+  <section id="delivery" class="mockup">
+    <div class="dots"></div><div class="grain"></div>
+    <div class="copy"><div class="eyebrow">04 / Delivery & social kit</div><div class="headline">Dip.<br><em>Crunch.</em><br>Repeat.</div><div class="sub">Persian kuku with big crunch energy—made for lunch breaks, late bites and sharing.</div><div class="yellow-note">HEAR THE CRUNCH. TASTE PERSIA.</div></div>
+    <div class="mascot-card"><img src="../mascot-reference.jpg" alt=""></div><div class="sticker">ONE MORE<br>DIP?</div>
+    <div class="bag"><div class="brand-seal"><img src="../logo-reference.jpg" alt=""></div><div class="stripe"><span>KHERT KHERTI</span></div></div>
+    <div class="dip white"></div><div class="dip red"></div><div class="dip green"></div>
+    <div class="bottomline">@KHERT.KHERTI &nbsp; / &nbsp; CRISPY PERSIAN KUKU</div>
+  </section>
+
+  <script>
+    const name = new URLSearchParams(location.search).get("view") || "packaging";
+    const allowed = ["packaging", "cart", "crew", "delivery"];
+    document.getElementById(allowed.includes(name) ? name : "packaging").classList.add("active");
+  </script>
+</body>
+</html>
